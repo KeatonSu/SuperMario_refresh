@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+import javax.sound.sampled.Clip;
 
 public class Stage extends JPanel implements Runnable {
 	private static final float FRAMERATE = 30;
@@ -20,7 +18,7 @@ public class Stage extends JPanel implements Runnable {
 	private boolean showMario=true;
 	protected static boolean camUpdate = true; //when enter tube = false, when enter again/coming out = true
 	private boolean isDead = false;
-	static AudioStream BGM = null;
+	private static Clip bgmClip = null;
 	public static List<GameObject> interactives = new ArrayList<>();;
 	public boolean stop = false;
 	
@@ -39,10 +37,7 @@ public class Stage extends JPanel implements Runnable {
 		setSize(size);
 		setLayout(null);
 		
-
-		BGM = SuperMario.playSound("bgm");
-
-		
+		AudioManager.playSound("bgm");
 	}
 	
 
@@ -62,14 +57,14 @@ public class Stage extends JPanel implements Runnable {
 				
 				if (mario.getX() >= Map.flagX && mario.getX() < Map.flagX + 20) {
 //					win					
-					AudioPlayer.player.stop(BGM);
+					AudioManager.stopSound();
 
 					win();
 					SuperMario.playSound("pass1");
 				}
 				if (isDead) {
 					SuperMario.playSound("die");
-					AudioPlayer.player.stop(BGM);
+					AudioManager.stopSound();
 
 
 					SuperMario.loseLife();
@@ -124,7 +119,7 @@ public class Stage extends JPanel implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		AudioPlayer.player.stop(BGM);
+		AudioManager.stopSound();
 		Thread.currentThread().interrupt();
 		
 	}

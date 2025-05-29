@@ -15,8 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import sun.audio.*;
-
 public class SuperMario {
 	// everything static, since there is only one game.
 	public static final int WIDTH = 400;
@@ -174,9 +172,9 @@ public class SuperMario {
 			coins = 0;
 			score+=10000;
 			marioLives++;
-			playSound("oneUp");
+			AudioManager.playSound("oneUp");
 		}
-		playSound("coin");
+		AudioManager.playSound("coin");
 	}
 	public static void loseLife() {
 		stageThread.interrupt();
@@ -373,28 +371,8 @@ public class SuperMario {
 	
 //	playing sound: https://www.tabnine.com/code/java/classes/sun.audio.AudioPlayer
 	
-	public static AudioStream playSound(String s) {
-//		String songFile = System.getProperty("user.dir") + "/src/sound/"+s+".wav";
-		String songFile = "/sound/"+s+".wav";
-
-	    InputStream in;
-		try {
-			in = SuperMario.class.getResourceAsStream(songFile);
-//					new FileInputStream(songFile);
-		    // create an audiostream from the inputstream
-		    AudioStream audioStream = new AudioStream(in);
-		    // play the audio clip with the audioplayer class
-		    AudioPlayer.player.start(audioStream);
-
-		    return audioStream;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+	public static void playSound(String s) {
+		AudioManager.playSound(s);
 	}
 	
 
