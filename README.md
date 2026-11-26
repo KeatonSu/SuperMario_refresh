@@ -1,4 +1,7 @@
-# Super Mario Java
+# Super Mario Java (Legacy Archive)
+
+> [!NOTE]
+> **Superseded by [`super-mario-go`](https://github.com/KeatonSu/super-mario-go)** — a ground-up Go + Ebitengine rebuild with 60 TPS physics, embedded assets, WebAssembly browser support ([Play Online](https://keatonsu.github.io/super-mario-go/)), and enhanced power-ups. This repository is kept as the legacy Java Swing reference.
 
 A Java implementation of Super Mario Bros. using Java Swing.
 
